@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ContactManager.master.cs" Inherits="WebForm.ContactManager" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- Bootstrap 3 -->
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <!-- #Boostrap 3 -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span> 
+                    </button>
+                <a class="navbar-brand" href="Default.aspx">Contact Management</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="Default.aspx">Home</a></li>
+                    <li><a href="AddContact.aspx">Add Contact</a></li>
+                    <li><a href="#">Find Contact</a></li>
+                    <li><a href="#">Edit Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Navbar -->
+
+    <div class="container">
+        <div class="jumbotron" style="margin-top: 55px;">
+            <h1>Contact Management</h1>
+            <p>
+                Contact management projects on the web.<br> Using Web API and Bootstrap.
+            </p>
+        </div>
+
+        <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="content" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </div>
+        </form>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                <a href="#"> BaoLHQ</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+    </div>
+</body>
+</html>
