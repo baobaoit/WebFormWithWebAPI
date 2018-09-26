@@ -24,19 +24,14 @@ namespace WebForm
 
         private void GetData()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:53362/");
-
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage respone = client.GetAsync("api/Contacts").Result;
-
-            if (respone.IsSuccessStatusCode)
+            try
             {
-                var contacts = respone.Content.ReadAsStringAsync().Result;
-                gvContacts.DataSource = (new JavaScriptSerializer()).Deserialize<List<Contact>>(contacts);
+                gvContacts.DataSource = MyHelper.GetListContact();
                 gvContacts.DataBind();
+            }
+            catch
+            {
+                MyHelper.WriteLine("GET Error");
             }
         }
     }

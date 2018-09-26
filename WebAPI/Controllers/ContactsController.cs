@@ -71,7 +71,9 @@ namespace WebAPI.Controllers
         }
 
         // POST: api/Contacts
+        [HttpPost]
         [ResponseType(typeof(Contact))]
+        [Route("api/PostContact")]
         public IHttpActionResult PostContact(Contact contact)
         {
             if (!ModelState.IsValid)
