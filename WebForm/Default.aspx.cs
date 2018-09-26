@@ -32,6 +32,7 @@ namespace WebForm
             catch
             {
                 MyHelper.WriteLine("GET Error");
+                Response.Write(MyHelper.GetAleartDanger("Some thing was wrong."));
             }
         }
     }

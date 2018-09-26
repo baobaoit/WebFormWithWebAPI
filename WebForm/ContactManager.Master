@@ -28,7 +28,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="Default.aspx">Home</a></li>
                     <li><a href="AddContact.aspx">Add Contact</a></li>
-                    <li><a href="#">Find Contact</a></li>
+                    <li><a href="DeleteContact.aspx">Delete Contact</a></li>
                     <li><a href="#">Edit Contact</a></li>
                 </ul>
             </div>

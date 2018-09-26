@@ -23,7 +23,9 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Contacts/5
+        [HttpGet]
         [ResponseType(typeof(Contact))]
+        [Route("api/GetContactByID")]
         public IHttpActionResult GetContact(int id)
         {
             Contact contact = db.Contacts.Find(id);
@@ -88,7 +90,9 @@ namespace WebAPI.Controllers
         }
 
         // DELETE: api/Contacts/5
+        [HttpDelete]
         [ResponseType(typeof(Contact))]
+        [Route("api/DeleteContact")]
         public IHttpActionResult DeleteContact(int id)
         {
             Contact contact = db.Contacts.Find(id);

@@ -58,6 +58,36 @@ namespace WebForm
             return listContact;
         }
         /// <summary>
+        /// GET a contact and then add it to the list to use the data binding.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static List<Contact> GetContactById(int id)
+        {
+            List<Contact> listContact = null;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GetMyBaseAddress());
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage respone = client.GetAsync("api/GetContactByID?id=" + id).Result;
+
+                if (respone.IsSuccessStatusCode)
+                {
+                    var contact = respone.Content.ReadAsStringAsync().Result;
+                    var deseriContact = JsonConvert.DeserializeObject<Contact>(contact);
+
+                    listContact = new List<Contact>();
+                    listContact.Add(deseriContact);
+                }
+            }
+
+            return listContact;
+        }
+        /// <summary>
         /// If can't get list contact then it will return 0
         /// </summary>
         /// <returns></returns>
@@ -84,6 +114,25 @@ namespace WebForm
                 var jsonContent = new StringContent(JsonConvert.SerializeObject(contact));
                 jsonContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response = client.PostAsync("api/PostContact", jsonContent).Result;
+            }
+
+            return response;
+        }
+        /// <summary>
+        /// DELETE a contact by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static HttpResponseMessage DeleteContact(int id)
+        {
+            HttpResponseMessage response = null;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GetMyBaseAddress());
+                client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                response = client.DeleteAsync("api/DeleteContact?id=" + id).Result;
             }
 
             return response;
