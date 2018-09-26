@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label for="inpContactID">Input ContactID: </label>
                 <asp:TextBox runat="server" ID="txtContactID" TextMode="Number" placeholder="Enter ContactID" CssClass="form-control" />
-                <button runat="server" id="btnFindContactById" class="btn btn-info" title="Find Contact by Id" onserverclick="btnFindContactById_ServerClick">
+                <button runat="server" id="btnFindContactById" class="btn btn-info" style="margin-top: 5px;" title="Find Contact by Id" onserverclick="btnFindContactById_ServerClick">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
             </div>

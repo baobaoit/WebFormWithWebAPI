@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DeleteContact.aspx" />
+    <Content Include="EditContact.aspx" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
@@ -136,6 +137,13 @@
     </Compile>
     <Compile Include="DeleteContact.aspx.designer.cs">
       <DependentUpon>DeleteContact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditContact.aspx.cs">
+      <DependentUpon>EditContact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditContact.aspx.designer.cs">
+      <DependentUpon>EditContact.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyHelper.cs" />
     <Compile Include="Default.aspx.cs">

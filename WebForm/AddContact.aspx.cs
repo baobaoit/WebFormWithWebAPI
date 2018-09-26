@@ -41,18 +41,18 @@ namespace WebForm
                 if (respone.IsSuccessStatusCode)
                 {
                     MyHelper.WriteLine("POST Success");
-                    Response.Write(MyHelper.GetAleartSuccess("Add new contact."));
+                    Response.Write(MyHelper.GetAlertSuccess("Add new contact."));
                 }
                 else
                 {
                     MyHelper.WriteLine("POST Error");
-                    Response.Write(MyHelper.GetAleartDanger("Some thing was wrong."));
+                    Response.Write(MyHelper.GetAlertDanger("Some thing was wrong."));
                 }
             }
             else
             {
                 MyHelper.WriteLine("Data is not filled out");
-                Response.Write(MyHelper.GetAleartWarning("Data is not filled out."));
+                Response.Write(MyHelper.GetAlertWarning("Data is not filled out."));
             }
         }
 

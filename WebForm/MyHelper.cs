@@ -31,6 +31,8 @@ namespace WebForm
         {
             return Regex.Replace(Text.Trim(), @"\s+", " ");
         }
+
+        #region Communicate with the Web API
         /// <summary>
         /// Calling GET method on the Web API
         /// </summary>
@@ -62,7 +64,7 @@ namespace WebForm
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static List<Contact> GetContactById(int id)
+        public static List<Contact> GetContactByIdToList(int id)
         {
             List<Contact> listContact = null;
 
@@ -86,6 +88,33 @@ namespace WebForm
             }
 
             return listContact;
+        }
+        /// <summary>
+        /// GET a contact with id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Contact GetContactById(int id)
+        {
+            Contact _Contact = null;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GetMyBaseAddress());
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage respone = client.GetAsync("api/GetContactByID?id=" + id).Result;
+
+                if (respone.IsSuccessStatusCode)
+                {
+                    var contact = respone.Content.ReadAsStringAsync().Result;
+                    _Contact = JsonConvert.DeserializeObject<Contact>(contact);
+                }
+            }
+
+            return _Contact;
         }
         /// <summary>
         /// If can't get list contact then it will return 0
@@ -137,23 +166,48 @@ namespace WebForm
 
             return response;
         }
-        public static string GetAleartWarning(string messages = "")
+        /// <summary>
+        /// PUT a contact has changed the information.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="ModifiedContact"></param>
+        /// <returns></returns>
+        public static HttpResponseMessage PutContact(int id, Contact ModifiedContact)
+        {
+            HttpResponseMessage response = null;
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(ModifiedContact));
+            jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GetMyBaseAddress());
+                response = client.PutAsync("api/PutContact?id=" + id, jsonContent).Result;
+            }
+
+            return response;
+        }
+        #endregion
+
+        #region Alert by div tag
+        public static string GetAlertWarning(string messages = "")
         {
             return "<div class=\"alert alert-warning alert-dismissible\" style=\"margin-top: 60px;\">" +
                    "<a href = \"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                    "<strong>Warning!</strong> " + messages + "</div>";
         }
-        public static string GetAleartSuccess(string messages = "")
+        public static string GetAlertSuccess(string messages = "")
         {
             return "<div class=\"alert alert-success alert-dismissible\" style=\"margin-top: 60px;\">" +
                    "<a href = \"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                    "<strong>Success!</strong> " + messages + "</div>";
         }
-        public static string GetAleartDanger(string messages = "")
+        public static string GetAlertDanger(string messages = "")
         {
             return "<div class=\"alert alert-danger alert-dismissible\" style=\"margin-top: 60px;\">" +
                    "<a href = \"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                    "<strong>Danger!</strong> " + messages + "</div>";
-        }
+        } 
+        #endregion
     }
 }

@@ -18,7 +18,7 @@ namespace WebForm
             int findContactID = Convert.ToInt32(txtContactID.Text);
 
             lblGridViewAlt.Visible = false;
-            gvContacts.DataSource = MyHelper.GetContactById(findContactID);
+            gvContacts.DataSource = MyHelper.GetContactByIdToList(findContactID);
             gvContacts.DataBind();
         }
 
@@ -34,11 +34,11 @@ namespace WebForm
 
                 if (respone.IsSuccessStatusCode)
                 {
-                    Response.Write(MyHelper.GetAleartSuccess("Contact was deleted."));
+                    Response.Write(MyHelper.GetAlertSuccess("Contact was deleted."));
                 }
                 else
                 {
-                    Response.Write(MyHelper.GetAleartWarning("Some thing was wrong."));
+                    Response.Write(MyHelper.GetAlertWarning("Some thing was wrong."));
                 }
             }
         }
